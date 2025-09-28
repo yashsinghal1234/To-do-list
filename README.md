@@ -1,31 +1,63 @@
-TO_DO_List — Deadline & Notification feature
+# To-do List (TaskBoard)
 
-What I changed
+A lightweight, client-side To-do List web app with priorities, optional deadlines, and notifications. Tasks are stored per-user in localStorage so you can keep separate lists by entering different usernames.
 
-- Added a Deadline input (`<input id="deadline-input" type="datetime-local">`) when creating a task.
-- Added a "Notify me when due" checkbox (`#notify-checkbox`).
-- Tasks now save `deadline` (ISO string) and `notify` (boolean) in localStorage alongside other task properties.
-- A background checker runs every 30 seconds and will show an in-app notification and a browser notification (if the user granted permission) when a task deadline is reached. Once notified a task is marked internally as `_notified` to avoid repeats.
-- Deadlines are shown in the task card; overdue deadlines are highlighted in red.
+Live demo
+-- You can host this repo using GitHub Pages or any static file server. (No server required — app is plain HTML/CSS/JS.)
 
-How to use
+Features
+- Add tasks with description and priority (Low / Medium / High).
+- Optional deadline using a datetime picker.
+- Optional notification flag to alert you when a task is due (in-app and browser notification if permission granted).
+- View tasks with simple filtering (All / Pending / Completed / Priority).
+- Per-user storage using localStorage: log in with any username to keep separate lists.
 
-1. Open `TO_DO_List/index.html` in your browser.
-2. Log in with a username.
-3. Add a task, optionally set a deadline and check "Notify me when due".
-4. To receive browser notifications, allow notifications when the browser prompts you (the app requests permission automatically).
-5. Keep the tab open (or in the background) — the app checks every 30s and will notify when the deadline passes.
+Files
+- `index.html` — app UI
+- `style.css` — styling
+- `script.js` — app logic (task CRUD, localStorage, notifications)
+- `README.md` — this file
 
-Notes & limitations
+Usage
 
-- Browser notifications require HTTPS or localhost and user permission. If running the file via `file://` you may not see browser notifications — open the page through a local server (e.g., `npx http-server` or similar) or host it.
-- The notification check runs in-page every 30 seconds, so notifications may appear up to 30s after the deadline.
-- The code stores a temporary `_notified` flag on tasks to avoid duplicate notifications. That flag is saved in localStorage.
+1. Clone or download this repository.
+2. Serve the folder with a local static server for best notifications support (recommended):
 
-Next steps (optional)
+```powershell
+cd "d:\lenovo\learning\javascript_learn\chai aur code\basic_projects\TO_DO_List"
+# using python
+python -m http.server 8000
+# or with npx http-server
+npx http-server -p 8000
+```
 
-- Add a UI to edit a task's deadline or to clear the `_notified` flag.
-- Allow scheduling reminders some minutes before the deadline.
-- Persist notification history or allow snoozing.
+Then open `http://localhost:8000` in your browser.
 
-If you'd like, I can add an "edit" UI for deadlines and a snooze option next.
+3. Enter a username and click "Get Started". If the username is new, an empty task list will be created.
+
+4. Add tasks. Optionally set a deadline and enable "Notify me when due". The app will request browser notification permission the first time; allow it to receive system notifications.
+
+Notes and limitations
+- Browser notifications require user permission and typically require HTTPS or localhost. If you open the file via `file://`, browser notifications may not work.
+- The app runs a simple in-page check every 30 seconds for due tasks. Notifications may appear up to 30 seconds after the exact deadline.
+- If you close the tab or the browser, the in-page checker will not run. For persistent push notifications you'd need a Service Worker + Push setup and a backend.
+
+Development
+
+- The app is plain HTML/CSS/JS. No build step required.
+- To modify code, edit `script.js` and `style.css`, then refresh your browser to see changes.
+
+Contributing
+
+If you'd like to contribute enhancements (edit UI, snooze, reminders), please open an issue or a pull request. Small, focused changes with explanatory commits are preferred.
+
+License
+
+This project is provided as-is. Add a license file if you plan to share it publicly (e.g., MIT license).
+
+---
+
+If you want, I can also:
+- Expand the README with screenshots and a quick API/behavior section.
+- Add a GitHub Actions workflow to validate the HTML/CSS on push.
+- Create a GitHub Pages workflow to publish the app automatically.
