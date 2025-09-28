@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TaskBoard - Project Management</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <h1><i class="fas fa-tasks"></i> TaskBoard</h1>
+        <div class="header-info">
+          <span class="date" id="current-date"></span>
+          <div class="user-info hidden" id="user-display">
+            <i class="fas fa-user-circle"></i>
+            <span id="current-user-name"></span>
+            <button id="logout-btn" class="logout-btn" title="Logout">
+              <i class="fas fa-sign-out-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Login Section -->
+    <div class="login-container">
+      <div class="login-card">
+        <div class="login-header">
+          <i class="fas fa-user-circle"></i>
+          <h2>Welcome Back</h2>
+          <p>Enter your username to access your tasks</p>
+        </div>
+        <div class="login-form">
+          <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input
+              type="text"
+              id="username"
+              placeholder="Enter your username"
+              autocomplete="off"
+            />
+          </div>
+          <button id="loginbtn" class="login-btn">
+            <i class="fas fa-sign-in-alt"></i>
+            Get Started
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div class="dashboard">
+      <!-- Add Task Section -->
+      <div class="container add-task-section">
+        <div class="card">
+          <div class="card-header">
+            <h3><i class="fas fa-plus-circle"></i> Add New Task</h3>
+          </div>
+          <div class="card-body">
+            <div class="input-group">
+              <i class="fas fa-edit"></i>
+              <input
+                type="text"
+                placeholder="What needs to be done?"
+                id="enter"
+                autocomplete="off"
+              />
+            </div>
+            <div class="priority-group">
+              <label for="priority-select">Priority:</label>
+              <select id="priority-select" class="priority-select">
+                <option value="low">🟢 Low Priority</option>
+                <option value="medium" selected>🟡 Medium Priority</option>
+                <option value="high">🔴 High Priority</option>
+              </select>
+            </div>
+            <div class="deadline-group">
+              <label for="deadline-input">Deadline:</label>
+              <input type="datetime-local" id="deadline-input" />
+            </div>
+            <div class="notify-group">
+              <input type="checkbox" id="notify-checkbox" />
+              <label for="notify-checkbox">Notify me when due</label>
+            </div>
+            <div class="button-group">
+              <button type="button" id="addbtn" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add Task
+              </button>
+              <button type="button" id="check-task" class="btn btn-secondary">
+                <i class="fas fa-list"></i> View Tasks
+              </button>
+            </div>
+            <div class="msg"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tasks Display Section -->
+      <div class="showTask-container">
+        <div class="tasks-board">
+          <div class="board-header">
+            <h3><i class="fas fa-clipboard-list"></i> Your Tasks</h3>
+            <div class="progress-stats">
+              <div class="stat-item">
+                <span class="stat-number" id="total-tasks">0</span>
+                <span class="stat-label">Total</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number" id="completed-tasks">0</span>
+                <span class="stat-label">Completed</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number" id="pending-tasks">0</span>
+                <span class="stat-label">Pending</span>
+              </div>
+            </div>
+            <div class="board-actions">
+              <select
+                id="filter-select"
+                class="filter-select"
+                title="Filter tasks by status or priority"
+              >
+                <option value="all">All Tasks</option>
+                <option value="pending">Pending</option>
+                <option value="completed">Completed</option>
+                <option value="high">High Priority</option>
+                <option value="medium">Medium Priority</option>
+                <option value="low">Low Priority</option>
+              </select>
+              <button type="button" id="addtask" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Add More
+              </button>
+              <button type="button" id="clearAlltask" class="btn btn-danger">
+                <i class="fas fa-trash"></i> Clear All
+              </button>
+            </div>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar">
+              <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <span class="progress-text" id="progress-text">0% Complete</span>
+          </div>
+          <div class="tasks-grid">
+            <div class="tasks"></div>
+          </div>
+          <div class="board-messages">
+            <p class="clearmsg"></p>
+            <p id="tasksmsg"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
